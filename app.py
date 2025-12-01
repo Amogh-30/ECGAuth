@@ -36,7 +36,10 @@ THRESHOLD  = 0.70            # similarity threshold (for claimed user prob)
 def _load_model_assets():
     base = os.path.dirname(__file__)
     app.logger.info("Loading models & mapping...")
-    ort_sess = ort.InferenceSession(os.path.join(base, "feature_model.onnx"))
+    ort_sess = ort.InferenceSession(
+        os.path.join(base, "feature_model.onnx"),
+        providers=['CPUExecutionProvider']
+    )
     rp       = joblib.load(os.path.join(base, "rp_transformer_all.joblib"))
     scaler   = joblib.load(os.path.join(base, "scaler_all.joblib"))
     svm      = joblib.load(os.path.join(base, "svm_classifier_all.joblib"))
