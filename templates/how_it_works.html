@@ -1,0 +1,77 @@
+{% extends 'base.html' %}
+{% block content %}
+<section class="hiw-hero">
+  <div class="hiw-hero-inner">
+    <h1 class="hiw-title">How it works</h1>
+    <p class="hiw-sub">
+      From raw ECG to a decision — here’s the full pipeline.
+    </p>
+  </div>
+</section>
+
+<section class="hiw-steps">
+  <ol class="hiw-grid">
+    <li class="hiw-card glass">
+      <div class="num">1</div>
+      <h3>Input</h3>
+      <p>Enter the username and upload header <code>.hea</code> and signal <code>.dat</code> files.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">2</div>
+      <h3>Windowing</h3>
+      <p>Extract a <strong>1500-sample</strong> slice (non-overlapping) for consistent inference.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">3</div>
+      <h3>Normalize</h3>
+      <p>Z-score normalization removes amplitude bias and stabilizes features.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">4</div>
+      <h3>ONNX features</h3>
+      <p>Feed the window to the ONNX model to get a <strong>128-D</strong> representation.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">5</div>
+      <h3>RP transform</h3>
+      <p>Reduce to <strong>96-D</strong> via a trained Random Projection transformer.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">6</div>
+      <h3>Scale</h3>
+      <p>Standardize with the fitted scaler used during training.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">7</div>
+      <h3>SVM scoring</h3>
+      <p>Compute decision margins against all enrolled user classes.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">8</div>
+      <h3>Similarity</h3>
+      <p>Take the <strong>claimed user’s</strong> margin and pass it through <em>sigmoid</em> → <strong>0..1</strong>.</p>
+    </li>
+
+    <li class="hiw-card glass">
+      <div class="num">9</div>
+      <h3>Decision</h3>
+      <p>Authenticate with Similarity ≥ <strong>0.70</strong>; Allow user in on success.</p>
+    </li>
+  </ol>
+
+  <div class="hiw-note">
+    <div class="pill">Tip</div>
+    <p>
+      Templates are <strong>cancelable</strong> — you can update or revoke a user’s enrollment 
+      without retraining the entire system.
+    </p>
+  </div>
+</section>
+{% endblock %}
